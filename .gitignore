@@ -39,3 +39,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cursor
+.cursorrules
+
+# VSCode
+.vscode
+
+# Photoshop
+*.psd
+
+# Adobe
+*.ai
+*.psd
+
+# Notes
+notes/
+
+
+

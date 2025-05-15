@@ -1,0 +1,191 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+@import "tailwindcss";
+/* @config "../tailwind.config.ts"; */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Share+Tech+Mono&display=swap");
+
+/* Reset defaults */
+:global(*) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff #16151d;
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #16151d;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 3px solid #16151d;
+}
+
+body {
+  font-family: "Share Tech Mono", monospace;
+}
+
+.orbitron-font-main {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.orbitron-font-sub {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.cell-color-hourly {
+  background-color: #000000;
+}
+
+.pistachio-text {
+  color: #aacbc4;
+}
+
+.pistachio-bg {
+  background-color: #aacbc4;
+}
+
+.dark-void-bg {
+  background-color: #0e0e0e;
+}
+
+.us-red-bg {
+  background-color: #b31942;
+}
+
+.us-red-text {
+  color: #b31942;
+}
+
+.us-red-border {
+  border-color: #b31942;
+}
+
+.us-blue-bg {
+  background-color: #0a3161;
+}
+
+.us-blue-text {
+  color: #0a3161;
+}
+
+.us-blue-border {
+  border-color: #0a3161;
+}
+
+.us-white-bg {
+  background-color: #ffffff;
+}
+
+.us-white-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.us-white-border {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.midnight-sky-bg {
+  background-color: #16151d;
+}
+
+.midnight-sky-text {
+  color: #16151d;
+}
+
+.loader-bar {
+  height: 15px;
+  width: 80px;
+  --c: no-repeat linear-gradient(#ffffff 0 0);
+  background: var(--c), var(--c), var(--c), var(--c);
+  background-size: 26% 3px;
+  margin: 0 auto;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  0%,
+  70%,
+  100% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  11.67% {
+    background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  23.33% {
+    background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 0,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
+  }
+  35% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 100%,
+      calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 50%;
+  }
+  46.67% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 0;
+  }
+  58.34% {
+    background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
+      calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 100%;
+  }
+}
+
+.loader-pixels {
+  width: 60px;
+  display: flex;
+  align-items: flex-start;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+}
+.loader-pixels:before,
+.loader-pixels:after {
+  content: "";
+  flex: 1;
+  aspect-ratio: 1;
+  --g: conic-gradient(from -90deg at 10px 10px, #fff 90deg, #0000 0);
+  background: var(--g), var(--g), var(--g);
+  filter: drop-shadow(30px 30px 0 #fff);
+  animation: l20 1s infinite;
+}
+.loader-pixels:after {
+  transform: scaleX(-1);
+}
+@keyframes l20 {
+  0% {
+    background-position: 0 0, 10px 10px, 20px 20px;
+  }
+  33% {
+    background-position: 10px 10px;
+  }
+  66% {
+    background-position: 0 20px, 10px 10px, 20px 0;
+  }
+  100% {
+    background-position: 0 0, 10px 10px, 20px 20px;
+  }
+}

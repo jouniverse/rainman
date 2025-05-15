@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rainman
 
-## Getting Started
+## Description
 
-First, run the development server:
+**Rainman** (officially named [USWeather](https://www.usweather.info)) is a weather app for US locations. The user can select a location and check the current weather and the forecast for the next 7 days, as well as some climate data for the location. The hourly weather forecast is _"updated every hour approximately 5 minutes after the hour"_<sup>1</sup>.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Data Sources
+
+**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as GeoColor CONUS view are updated more frequently. Climate data is from the last 10 years, if available.
+
+## UI
+
+![Rainman UI](./public/ui/ui-1.png)
+![Rainman UI](./public/ui/ui-2.png)
+![Rainman UI](./public/ui/ui-3.png)
+
+Walkthrough of the app is available [here](https://youtu.be/FxEJKzEaJlM).
+
+## Run Locally
+
+Install the dependencies:
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see view the app.
 
-## Learn More
+## Notes
 
-To learn more about Next.js, take a look at the following resources:
+The NOAA Climate API returns 50x errors quite often, so climate data will not always be available.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you are interested in all the available NOAA weather and radar stations in the US, and why wouldn't you be, they can be viewed here: [NOAA US Weather Stations](https://docs.google.com/spreadsheets/d/1NrUjMkiUXB8YeAdnQPpog1fnciE--neEKWUW1YAx_i8/edit?usp=sharing) and
+[NOAA US Radar Stations](https://docs.google.com/spreadsheets/d/12Y--CBWJCfabfY0aU9gOp4bUQG4ahxYN0nhqmvYJWno/edit?usp=sharing). The tables are updated infrequently.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+All Rights Reserved _jouniverse_ 2025.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## References
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<sup>1</sup>[NOAA Weather API General Information](https://www.weather.gov/gid/nwr_general)
+<sup>2</sup>[NOAA Weather API](https://www.weather.gov/documentation/services-web-api#/)
+<sup>3</sup>[NOAA Climate API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2)
