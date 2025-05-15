@@ -1,8 +1,7 @@
-import NextAuth, { DefaultSession, User as NextAuthUser } from 'next-auth';
+import NextAuth, { DefaultSession } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { User } from '@/models/User';
 import connectDB from '@/lib/db';
-import { JWT } from 'next-auth/jwt';
 
 declare module 'next-auth' {
   interface Session {
@@ -10,12 +9,6 @@ declare module 'next-auth' {
       id: string;
       username: string;
     } & DefaultSession['user']
-  }
-
-  interface User extends NextAuthUser {
-    id: string;
-    username: string;
-    email: string;
   }
 }
 
@@ -61,19 +54,19 @@ const authOptions = {
     signIn: '/login',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: { id?: string; username?: string }; user?: { id: string; username: string } }) {
       if (user) {
         token.id = user.id;
         token.username = user.username;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: { session: { user?: { id?: string; username?: string } }; token: { id: string; username: string } }) {
       if (session.user) {
         session.user.id = token.id;
         session.user.username = token.username;
       }
-      return session as Session;
+      return session;
     }
   }
 };

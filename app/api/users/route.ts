@@ -5,7 +5,7 @@ import { User } from '@/models/User';
 import connectDB from '@/lib/db';
 
 // Get user profile
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     
@@ -102,7 +102,12 @@ export async function PUT(req: Request) {
     await connectDB();
     
     // Build update operations
-    const updateOperations: any = {};
+    interface UpdateOperations {
+      $set?: Record<string, unknown>;
+      $unset?: Record<string, boolean>;
+    }
+    
+    const updateOperations: UpdateOperations = {};
     
     // Only add $set if there are fields to set
     if (Object.keys(filteredUpdates).length > 0) {
@@ -138,7 +143,7 @@ export async function PUT(req: Request) {
 }
 
 // Delete user account
-export async function DELETE(req: Request) {
+export async function DELETE() {
   try {
     const session = await getServerSession(authOptions);
     
