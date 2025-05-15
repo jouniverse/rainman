@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 interface DailyForecastTableProps {
-  daily: unknown;
+  daily: {
+    properties: {
+      periods: Period[];
+    };
+  };
 }
 
 interface Period {
@@ -40,8 +44,8 @@ function getDayLabel(day: Period | null, night: Period | null) {
 
 export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
   // Type guard for daily
-  const periods: Period[] = (daily && typeof daily === 'object' && 'properties' in daily && (daily as any).properties?.periods)
-    ? (daily as any).properties.periods
+  const periods: Period[] = (daily && 'properties' in daily && daily.properties?.periods)
+    ? daily.properties.periods
     : [];
 
   // Group periods by day (pair day and night)

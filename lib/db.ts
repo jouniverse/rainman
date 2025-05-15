@@ -11,8 +11,10 @@ interface Cached {
   promise: Promise<typeof mongoose> | null;
 }
 
+// In Next.js, we need to use var for global declarations
 declare global {
-  let mongoose: Cached | undefined;
+  // eslint-disable-next-line no-var
+  var mongoose: Cached | undefined;
 }
 
 const cached: Cached = global.mongoose || { conn: null, promise: null };
