@@ -59,7 +59,7 @@ export default function ForecastHeader({ daily, lat, lng, address, timeZone }: F
     <div className="flex flex-col md:flex-row items-center gap-4 black-emerald-bg rounded-lg p-4 shadow">
       <div className="flex-1">
         <div className="text-lg text-gray-400">
-          {now.toFormat('EEE, MMM d, yyyy, HH:mm')}
+          {now.toFormat('EEE, MMM d, yyyy, h:mm a')}
           {tzAbbr && <span className="ml-2">({tzAbbr})</span>}
         </div>
         <div className="text-3xl font-mono text-white">
