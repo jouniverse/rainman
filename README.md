@@ -24,7 +24,7 @@ street+city+state,
 street+state+zip,
 street+city+zip.
 
-Zip code, street addresss, or street address and zip code alone will not work. The app will not return any results. The app will also not return any results if the location is not in the US.
+Zip code, street addresss, or street address+zip code alone will not work. The app will not return any results. The app will also not return any results if the location is not in the US.
 
 You can also enter latitude and longitude values or select a location from a map.
 
