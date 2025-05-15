@@ -6,7 +6,7 @@
 
 ## Data Sources
 
-**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as satellite imagery, like the GeoColor CONUS<sup>4</sup> view are updated more frequently. Climate data is from the last 10 years, if available.
+**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as satellite imagery, like the GeoColor CONUS<sup>4</sup> view are updated more frequently. Climate data is from the last 10 years, if available. Otherwise older data is displayed.
 
 ## UI
 
