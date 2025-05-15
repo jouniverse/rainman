@@ -1,5 +1,4 @@
 import Navbar from '../components/layout/Navbar';
-import VideoModal from '../components/layout/VideoModal';
 
 export default function VideoPage() {
   return (
