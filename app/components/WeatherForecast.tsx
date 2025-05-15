@@ -33,7 +33,24 @@ interface Meta {
 
 interface WeatherData {
   meta: Meta;
-  daily: unknown;
+  daily: {
+    properties: {
+      periods: Array<{
+        number: number;
+        name: string;
+        startTime: string;
+        isDaytime: boolean;
+        temperature: number;
+        temperatureUnit: string;
+        probabilityOfPrecipitation?: { value: number | null };
+        windSpeed: string;
+        windDirection: string;
+        shortForecast: string;
+        detailedForecast: string;
+        icon?: string;
+      }>;
+    };
+  };
   hourly: unknown;
 }
 
