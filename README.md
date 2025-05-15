@@ -6,7 +6,7 @@
 
 ## Data Sources
 
-**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as GeoColor CONUS view are updated more frequently. Climate data is from the last 10 years, if available.
+**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as satellite imagery, like the GeoColor CONUS<sup>4</sup> view are updated more frequently. Climate data is from the last 10 years, if available.
 
 ## UI
 
@@ -16,21 +16,19 @@
 
 Walkthrough of the app is available [here](https://youtu.be/FxEJKzEaJlM).
 
-## Run Locally
+## Usage
 
-Install the dependencies:
+Select a location by selecting a state, a city, a state and a city or any of the following:
+street+city+state+zip,
+street+city+state,
+street+state+zip,
+street+city+zip.
 
-```
-npm install
-```
+Zip code, street addresss, or street address and zip code alone will not work. The app will not return any results. The app will also not return any results if the location is not in the US.
 
-Run the development server:
+You can also enter latitude and longitude values or select a location from a map.
 
-```
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see view the app.
+After selecting a location, fetch the weather and climate data.
 
 ## Notes
 
@@ -48,3 +46,4 @@ All Rights Reserved _jouniverse_ 2025.
 <sup>1</sup>[NOAA Weather API General Information](https://www.weather.gov/gid/nwr_general)
 <sup>2</sup>[NOAA Weather API](https://www.weather.gov/documentation/services-web-api#/)
 <sup>3</sup>[NOAA Climate API](https://www.ncdc.noaa.gov/cdo-web/webservices/v2)
+<sup>4</sup>[GeoColor Product](https://www.star.nesdis.noaa.gov/goes/documents/QuickGuide_CIRA_Geocolor_20171019.pdf)
