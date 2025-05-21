@@ -84,7 +84,7 @@ export default function ForecastHeader({ daily, lat, lng, address, timeZone }: F
         </div>
       </div>
       {current.icon && (
-        <img src={current.icon} alt={current.shortForecast} className="w-20 h-20 rounded-lg border-2 us-white-border sepia-60" />
+        <img src={current.icon} alt={current.shortForecast} className="w-20 h-20 sepia-60 rounded-lg border-2 us-white-border" />
       )}
     </div>
   );

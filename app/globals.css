@@ -3,6 +3,20 @@
 /* @config "../tailwind.config.ts"; */
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Share+Tech+Mono&display=swap");
 
+:root {
+  --scrollbar-color: #ffffff;
+  --scrollbar-bg-color: #16151d;
+
+  --pistachio: #aacbc4;
+
+  --dark-void: #0e0e0e;
+  --midnight-sky: #16151d;
+
+  --us-red: #b31942;
+  --us-blue: #0a3161;
+  --us-white: #ffffff;
+}
+
 /* Reset defaults */
 :global(*) {
   margin: 0;
@@ -14,7 +28,7 @@
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #ffffff #16151d;
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color);
 }
 
 /* Chrome, Edge, Safari */
@@ -23,15 +37,16 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #16151d;
+  background: var(--scrollbar-bg-color);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #ffffff;
+  background-color: var(--scrollbar-color);
   border-radius: 6px;
-  border: 3px solid #16151d;
+  border: 3px solid var(--scrollbar-bg-color);
 }
 
+html,
 body {
   font-family: "Share Tech Mono", monospace;
 }
@@ -53,48 +68,48 @@ body {
   height: 100vh;
 }
 
-.cell-color-hourly {
+/* .cell-color-hourly {
   background-color: #000000;
-}
+} */
 
 .pistachio-text {
-  color: #aacbc4;
+  color: var(--pistachio);
 }
 
 .pistachio-bg {
-  background-color: #aacbc4;
+  background-color: var(--pistachio);
 }
 
 .dark-void-bg {
-  background-color: #0e0e0e;
+  background-color: var(--dark-void);
 }
 
 .us-red-bg {
-  background-color: #b31942;
+  background-color: var(--us-red);
 }
 
 .us-red-text {
-  color: #b31942;
+  color: var(--us-red);
 }
 
 .us-red-border {
-  border-color: #b31942;
+  border-color: var(--us-red);
 }
 
 .us-blue-bg {
-  background-color: #0a3161;
+  background-color: var(--us-blue);
 }
 
 .us-blue-text {
-  color: #0a3161;
+  color: var(--us-blue);
 }
 
 .us-blue-border {
-  border-color: #0a3161;
+  border-color: var(--us-blue);
 }
 
 .us-white-bg {
-  background-color: #ffffff;
+  background-color: var(--us-white);
 }
 
 .us-white-text {
@@ -106,11 +121,27 @@ body {
 }
 
 .midnight-sky-bg {
-  background-color: #16151d;
+  background-color: var(--midnight-sky);
 }
 
 .midnight-sky-text {
-  color: #16151d;
+  color: var(--midnight-sky);
+}
+
+.notch {
+  /* clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%, 0 25%); */
+  clip-path: polygon(0 0, 75% 0, 100% 25%, 100% 100%, 25% 100%, 0 75%);
+  /* clip-path: polygon(25% 0%, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 25%); */
+}
+
+.img-outline {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+.notch-10 {
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 10%);
+  /* clip-path: polygon(10% 0%, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%); */
 }
 
 .loader-bar {

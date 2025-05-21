@@ -897,7 +897,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
           <div className="flex gap-3 mt-4">
             <button
               type="submit"
-              className="flex-1 items-center justify-center bg-black text-white border border-white py-2 px-4 rounded hover:border-rose-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex-1 items-center justify-center bg-black text-white rounded border border-white py-2 px-4 hover:border-rose-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               disabled={loading}
             >
               {loading ? <div className="loader-bar"></div> : 'Weather'}
@@ -917,7 +917,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
             <span className="font-semibold">Selected Coordinates:</span> {pendingCoords ? `${pendingCoords.lat.toFixed(6)}, ${pendingCoords.lng.toFixed(6)}` : `${selectedLocation.lat.toFixed(6)}, ${selectedLocation.lng.toFixed(6)}`}
           </div>
         </div>
-        <div className="flex-1 min-h-[300px] mt-4 mb-4">
+        <div className="flex-1 min-h-[300px] notch-10 mt-4 mb-4">
           <MapContainer center={mapCenter} onMapClick={handleMapClick} />
         </div>
       </div>

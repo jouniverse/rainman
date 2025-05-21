@@ -99,7 +99,7 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                   <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">
-                      {p.icon && <img src={p.icon} alt={p.shortForecast} className="w-8 h-8 mx-auto rounded-sm sepia-60" />}
+                      {p.icon && <img src={p.icon} alt={p.shortForecast} className="w-8 h-8 mx-auto notch sepia-60" />}
                     </td>
                   ))}
                 </tr>

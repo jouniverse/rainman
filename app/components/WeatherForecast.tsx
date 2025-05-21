@@ -94,7 +94,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
               <img
                 src={`https://radar.weather.gov/ridge/standard/${radarStation}_loop.gif`}
                 alt={`Radar loop for station ${radarStation}`}
-                className="w-full max-w-md rounded-lg border us-white-border sepia-30 brightness-95"
+                className="w-full max-w-md rounded border us-white-border sepia-30 brightness-95"
                 style={{ objectFit: 'contain' }}
               />
             </div>
@@ -108,7 +108,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
             <img
               src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
               alt="CONUS radar loop"
-              className="w-full max-w-md rounded-lg border us-white-border mb-4 sepia-30 brightness-95"
+              className="w-full max-w-md rounded border us-white-border mb-4 sepia-30 brightness-95"
               style={{ objectFit: 'contain' }}
             />
           </div>
@@ -149,7 +149,7 @@ function GeoColorImagerySection() {
           <img
             src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/CONUS/GEOCOLOR/625x375.jpg"
             alt="GeoColor Channel CONUS View"
-            className="w-full max-w-2xl rounded-lg border us-white-border mt-4 mb-4 sepia-30 brightness-95"
+            className="w-full max-w-2xl rounded border us-white-border mt-4 mb-4 sepia-30 brightness-95"
             style={{ objectFit: 'contain' }}
           />
           <a
@@ -289,7 +289,6 @@ export default function WeatherForecast({ lat, lng, address, countyFIPS }: Weath
     return (
       <div className="flex-1 min-h-screen flex items-center justify-center bg-[#16151d]">
         <div className="text-center">
-          <img src="/icons/rain.svg" alt="Rain" className="w-32 h-32 mx-auto mb-4 opacity-50" />
           <p className="text-xl us-white-text">Select forecast location from the side panel</p>
         </div>
       </div>
