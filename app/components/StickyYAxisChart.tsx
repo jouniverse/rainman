@@ -9,12 +9,17 @@ import {
   PointElement,
   LineElement,
   BarElement,
+  LineController,
+  BarController,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
+// The generic `Chart` component (unlike react-chartjs-2's dedicated `Line`/`Bar`
+// components) does not auto-register a controller for its chart type, so both
+// controllers must be registered explicitly here.
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, LineController, BarController, Title, Tooltip, Legend);
 
 interface AxisTick {
   pixel: number;
