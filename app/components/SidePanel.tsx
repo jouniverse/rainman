@@ -555,7 +555,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
             {showStateDropdown && stateOptions.length > 0 && (
               <ul
                 ref={stateDropdownRef}
-                className="absolute z-10 midnight-sky-bg border us-white-border w-full max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
+                className="absolute z-10 midnight-sky-bg-dark border us-white-border w-full max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
               >
                 {stateOptions
                   .filter(opt =>
@@ -608,7 +608,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
             {showCityDropdown && cityOptions.length > 0 && (
               <ul
                 ref={cityDropdownRef}
-                className="absolute z-10 midnight-sky-bg border us-white-border w-full max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
+                className="absolute z-10 midnight-sky-bg-dark border us-white-border w-85 max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
               >
                 {cityOptions
                   .filter(opt => {

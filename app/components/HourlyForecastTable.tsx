@@ -73,32 +73,32 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
               <tbody>
                 {/* Weekday row */}
                 <tr className="text-gray-400">
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">{getWeekday(p.startTime)}</td>
                   ))}
                 </tr>
                 {/* Hour row */}
                 <tr className="text-gray-400">
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">{getHour(p.startTime)}</td>
                   ))}
                 </tr>
                 {/* AM/PM row */}
                 <tr className="text-gray-400">
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">{getAMPM(p.startTime)}</td>
                   ))}
                 </tr>
                 {/* Weather icon row */}
                 <tr>
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">
                       {p.icon && <WeatherIcon shortForecast={p.shortForecast} isDaytime={p.isDaytime ?? true} className="w-6 h-6 mx-auto text-lime-300" />}
@@ -107,13 +107,13 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                 </tr>
                 {/* Temperature row */}
                 <tr>
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     <div style={{ width: 32, height: 32, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Image src={rowIcons.temperature} alt="Temperature" width={32} height={32} style={{ objectFit: 'contain' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                       <noscript><div style={{ width: 32, height: 32, background: '#fbbf24' }} /></noscript>
                     </div>
                   </td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     {units.temperature}
                   </td>
                   {periods.map((p, i) => (
@@ -123,13 +123,13 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                 {/* Add four empty rows above the current sticky rows */}
                 {/* Dewpoint row */}
                 <tr>
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     <div style={{ width: 32, height: 32, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Image src={rowIcons.dewpoint} alt="Dew Point" width={32} height={32} style={{ objectFit: 'contain' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                       <noscript><div style={{ width: 32, height: 32, background: '#38bdf8' }} /></noscript>
                     </div>
                   </td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     {units.dewpoint}
                   </td>
                   {/* convert dewpoint to fahrenheit */}
@@ -141,13 +141,13 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                 </tr>
                 {/* Windspeed row */}
                 <tr>
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     <div style={{ width: 32, height: 32, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Image src={rowIcons.windspeed} alt="Wind Speed" width={32} height={32} style={{ objectFit: 'contain' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                       <noscript><div style={{ width: 32, height: 32, background: '#f472b6' }} /></noscript>
                     </div>
                   </td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     {units.windspeed}
                   </td>
                   {periods.map((p, i) => (
@@ -156,13 +156,13 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                 </tr>
                 {/* Wind direction row */}
                 <tr>
-                  <td className="midnight-sky-bg sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-0 z-10" style={{ left: 0, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     <div style={{ width: 32, height: 32, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Image src={rowIcons.winddirection} alt="Wind Direction" width={32} height={32} style={{ objectFit: 'contain' }} onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
                       <noscript><div style={{ width: 32, height: 32, background: '#a3e635' }} /></noscript>
                     </div>
                   </td>
-                  <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
+                  <td className="midnight-sky-bg-dark sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}>
                     {units.winddirection}
                   </td>
                   {periods.map((p, i) => (

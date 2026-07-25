@@ -12,7 +12,6 @@
 
 ![Rainman UI](./public/ui/ui-1.png)
 ![Rainman UI](./public/ui/ui-2.png)
-![Rainman UI](./public/ui/ui-3.png)
 
 Walkthrough of the app is available [here](https://youtu.be/FxEJKzEaJlM).
 
