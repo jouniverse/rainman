@@ -110,8 +110,8 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
       {
         label: "TMIN (°F)",
         data: tmin,
-        borderColor: "#0A3161",
-        backgroundColor: "rgb(10, 49, 97, 0.8)",
+        borderColor: "#67e8f9",
+        backgroundColor: "rgba(103, 232, 249, 0.15)",
         pointRadius: 0,
         yAxisID: "y",
       },
@@ -130,7 +130,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
     interaction: { mode: "index" as const, intersect: false },
     stacked: false,
     plugins: { 
-      legend: { position: "top" as const, labels: {boxHeight: 1} },
+      legend: { position: "top" as const, labels: {boxHeight: 1, color: '#ffffff'} },
       tooltip: {
         mode: 'index' as const,
         intersect: false,
@@ -148,6 +148,9 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
         }
       },
       x: {
+        ticks: {
+          color: '#ffffff',
+        },
         grid: {
           drawOnChartArea: false,
         }
@@ -172,7 +175,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
   const prcpOptions = {
     responsive: true,
     plugins: { 
-      legend: { position: "top" as const, labels: {boxHeight: 5} },
+      legend: { position: "top" as const, labels: {boxHeight: 5, color: '#ffffff'} },
       tooltip: {
         mode: 'index' as const,
         intersect: false,
@@ -188,6 +191,9 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
         }
       },
       x: {
+        ticks: {
+          color: '#ffffff',
+        },
         grid: {
           drawOnChartArea: false,
         }

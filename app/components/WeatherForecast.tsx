@@ -94,7 +94,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
               <img
                 src={`https://radar.weather.gov/ridge/standard/${radarStation}_loop.gif`}
                 alt={`Radar loop for station ${radarStation}`}
-                className="w-full rounded border us-white-border sepia-30 brightness-95"
+                className="w-full rounded border us-white-border sepia-20 brightness-95"
                 style={{ objectFit: 'contain' }}
               />
             </div>
@@ -108,7 +108,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
             <img
               src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
               alt="CONUS radar loop"
-              className="w-full rounded border us-white-border mb-4 sepia-30 brightness-95"
+              className="w-full rounded border us-white-border mb-4 sepia-20 brightness-95"
               style={{ objectFit: 'contain' }}
             />
           </div>
@@ -149,7 +149,7 @@ function GeoColorImagerySection() {
           <img
             src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/CONUS/GEOCOLOR/625x375.jpg"
             alt="GeoColor Channel CONUS View"
-            className="w-full rounded border us-white-border mt-4 mb-4 sepia-30 brightness-95"
+            className="w-full rounded border us-white-border mt-4 mb-4 sepia-20 brightness-95"
             style={{ objectFit: 'contain' }}
           />
           <a

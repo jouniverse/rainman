@@ -89,7 +89,7 @@ export default function MapContainer({ center, onMapClick }: MapContainerProps) 
             type="button"
             onClick={() => setBasemap(key)}
             className={`px-2 py-1 transition-colors ${
-              basemap === key ? 'bg-lime-400 text-black' : 'midnight-sky-bg text-white hover:bg-gray-700'
+              basemap === key ? 'bg-lime-400 text-black' : 'bg-black/60 text-white hover:bg-black/80'
             }`}
           >
             {BASEMAPS[key].label}

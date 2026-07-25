@@ -92,7 +92,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
     interaction: { mode: 'index' as const, intersect: false },
     stacked: false,
     plugins: { 
-      legend: { position: 'top' as const, labels: {boxHeight: 1} }
+      legend: { position: 'top' as const, labels: {boxHeight: 1, color: '#ffffff'} }
     },
     scales: {
       y: { 
@@ -106,6 +106,9 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         }
       },
       x: {
+        ticks: {
+          color: '#ffffff',
+        },
         grid: {
           drawOnChartArea: false,
         }
@@ -136,7 +139,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
   const precipOptions = {
     responsive: true,
     plugins: { 
-      legend: { position: 'top' as const, labels: {boxHeight: 1} },
+      legend: { position: 'top' as const, labels: {boxHeight: 1, color: '#ffffff'} },
       tooltip: {
         mode: 'index' as const,
         intersect: false,
@@ -152,6 +155,9 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         }
       },
       x: {
+        ticks: {
+          color: '#ffffff',
+        },
         grid: {
           drawOnChartArea: false,
         }
@@ -175,7 +181,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
   const windOptions = {
     responsive: true,
     plugins: { 
-      legend: { position: 'top' as const, labels: {boxHeight: 1} },
+      legend: { position: 'top' as const, labels: {boxHeight: 1, color: '#ffffff'} },
       tooltip: {
         mode: 'index' as const,
         intersect: false,
@@ -191,6 +197,9 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         }
       },
       x: {
+        ticks: {
+          color: '#ffffff',
+        },
         grid: {
           drawOnChartArea: false,
         }
