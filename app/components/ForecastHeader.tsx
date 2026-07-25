@@ -1,11 +1,14 @@
 import React from 'react';
 import { DateTime } from 'luxon';
+import WeatherWidget from './WeatherWidget';
 
 interface Period {
   temperature: number;
   temperatureUnit: string;
   shortForecast: string;
   icon?: string;
+  isDaytime?: boolean;
+  probabilityOfPrecipitation?: { value: number | null };
   name: string;
   startTime?: string;
 }
@@ -56,7 +59,7 @@ export default function ForecastHeader({ daily, lat, lng, address, timeZone }: F
   console.log('Address data:', address);
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 black-emerald-bg rounded-lg p-4 shadow">
+    <div className="flex flex-col md:flex-row items-center gap-4 midnight-sky-bg rounded-2xl border-t-2 border-lime-400/40 p-4 shadow">
       <div className="flex-1">
         <div className="text-lg text-gray-400">
           {now.toFormat('EEE, MMM d, yyyy, h:mm a')}
@@ -84,7 +87,13 @@ export default function ForecastHeader({ daily, lat, lng, address, timeZone }: F
         </div>
       </div>
       {current.icon && (
-        <img src={current.icon} alt={current.shortForecast} className="w-20 h-20 sepia-60 rounded-lg border-2 us-white-border" />
+        <WeatherWidget
+          temperature={current.temperature}
+          temperatureUnit={current.temperatureUnit}
+          precipitationPercent={current.probabilityOfPrecipitation?.value ?? null}
+          shortForecast={current.shortForecast}
+          isDaytime={current.isDaytime ?? true}
+        />
       )}
     </div>
   );

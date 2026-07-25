@@ -2,11 +2,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { DateTime } from 'luxon';
+import WeatherIcon from '../lib/weatherIcons';
 
 interface HourlyPeriod {
   startTime: string;
   temperature: number;
   temperatureUnit: string;
+  isDaytime?: boolean;
   dewpoint?: { value: number | null; unitCode?: string };
   windSpeed?: string;
   windDirection?: string;
@@ -63,7 +65,7 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
 
   return (
     <div className="w-full mb-6">
-      <div className="midnight-sky-bg shadow p-4 border us-white-border">
+      <div className="midnight-sky-bg shadow p-4 border us-white-border rounded-2xl">
         <div className="font-mono text-gray-200 mb-2 orbitron-font-sub">Hourly Forecast (7 days)</div>
         <div className="overflow-x-auto">
           <div className="inline-block min-w-[900px] align-top">
@@ -99,7 +101,7 @@ export default function HourlyForecastTable({ hourly, timeZone }: HourlyForecast
                   <td className="midnight-sky-bg sticky left-8 z-10 border-r us-white-border" style={{ left: 32, zIndex: 10, width: 32, minWidth: 32, maxWidth: 32, padding: 0 }}></td>
                   {periods.map((p, i) => (
                     <td key={i} className="min-w-[38px] border-r us-white-border">
-                      {p.icon && <img src={p.icon} alt={p.shortForecast} className="w-8 h-8 mx-auto notch sepia-60" />}
+                      {p.icon && <WeatherIcon shortForecast={p.shortForecast} isDaytime={p.isDaytime ?? true} className="w-6 h-6 mx-auto text-lime-300" />}
                     </td>
                   ))}
                 </tr>

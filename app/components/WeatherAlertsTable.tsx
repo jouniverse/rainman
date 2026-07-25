@@ -74,7 +74,7 @@ export default function WeatherAlertsTable({ countyUrl }: WeatherAlertsTableProp
   }, [countyCode]);
 
   return (
-    <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border">
+    <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border rounded-2xl">
       <button
         className="us-white-text mb-2 flex items-center justify-between w-full"
         onClick={() => setOpen((v) => !v)}
@@ -96,7 +96,7 @@ export default function WeatherAlertsTable({ countyUrl }: WeatherAlertsTableProp
           <div className="pistachio-text">No active alerts for this county.</div>
         )}
         {alerts.length > 0 && (
-          <div className="space-y-6">
+          <div className="space-y-6 max-h-96 overflow-y-auto pr-1">
             {alerts.map((a, i) => (
               <div key={i} className="bg-gray-700 rounded-lg p-4 shadow">
                 <table className="w-full text-sm text-left text-gray-300">

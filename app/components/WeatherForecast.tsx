@@ -72,7 +72,7 @@ interface ClimateData {
 function RadarImagerySection({ radarStation }: { radarStation?: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border">
+    <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border rounded-t-2xl">
       <button
         className="us-white-text mb-2 font-mono flex items-center justify-between w-full"
         onClick={() => setOpen((v) => !v)}
@@ -94,7 +94,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
               <img
                 src={`https://radar.weather.gov/ridge/standard/${radarStation}_loop.gif`}
                 alt={`Radar loop for station ${radarStation}`}
-                className="w-full max-w-md rounded border us-white-border sepia-30 brightness-95"
+                className="w-full rounded border us-white-border sepia-30 brightness-95"
                 style={{ objectFit: 'contain' }}
               />
             </div>
@@ -108,7 +108,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
             <img
               src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
               alt="CONUS radar loop"
-              className="w-full max-w-md rounded border us-white-border mb-4 sepia-30 brightness-95"
+              className="w-full rounded border us-white-border mb-4 sepia-30 brightness-95"
               style={{ objectFit: 'contain' }}
             />
           </div>
@@ -130,7 +130,7 @@ function RadarImagerySection({ radarStation }: { radarStation?: string }) {
 function GeoColorImagerySection() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="midnight-sky-bg p-4 pt-6 shadow mb-6 border-l border-r border-b us-white-border">
+    <div className="midnight-sky-bg p-4 pt-6 shadow mb-6 border-l border-r border-b us-white-border rounded-b-2xl">
       <button
         className="us-white-text mb-2 font-mono flex items-center justify-between w-full"
         onClick={() => setOpen((v) => !v)}
@@ -149,7 +149,7 @@ function GeoColorImagerySection() {
           <img
             src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/CONUS/GEOCOLOR/625x375.jpg"
             alt="GeoColor Channel CONUS View"
-            className="w-full max-w-2xl rounded border us-white-border mt-4 mb-4 sepia-30 brightness-95"
+            className="w-full rounded border us-white-border mt-4 mb-4 sepia-30 brightness-95"
             style={{ objectFit: 'contain' }}
           />
           <a
@@ -287,8 +287,8 @@ export default function WeatherForecast({ lat, lng, address, countyFIPS }: Weath
   // Show instruction screen when no location is selected (lat and lng are 0)
   if (lat === 0 && lng === 0) {
     return (
-      <div className="flex-1 min-h-screen flex items-center justify-center bg-[#16151d]">
-        <div className="text-center">
+      <div className="flex-1 min-h-screen flex items-center justify-center">
+        <div className="text-center midnight-sky-bg rounded-2xl px-8 py-6 border us-white-border">
           <p className="text-xl us-white-text">Select forecast location from the side panel</p>
         </div>
       </div>
@@ -302,7 +302,7 @@ export default function WeatherForecast({ lat, lng, address, countyFIPS }: Weath
   return (
     <div className="w-full max-w-5xl mx-auto p-4">
       {/* Weather Forecast Section Header */}
-      <div className="section-header text-2xl font-bold text-white mb-4 mt-15 orbitron-font-main">Weather Forecast</div>
+      <div className="section-header text-2xl font-bold text-white mb-4 mt-15 orbitron-font-main border-l-4 border-lime-400/70 pl-3">Weather Forecast</div>
       {/* ForecastHeader */}
       <div className="mb-6">
         <ForecastHeader
@@ -334,7 +334,7 @@ export default function WeatherForecast({ lat, lng, address, countyFIPS }: Weath
         <WeatherAlertsTable countyUrl={data.meta.properties.county} />
       )}
       {/* Climate Data Section Header */}
-      <div className="section-header text-2xl font-bold text-white mb-4 mt-8 orbitron-font-main">Climate Data</div>
+      <div className="section-header text-2xl font-bold text-white mb-4 mt-8 orbitron-font-main border-l-4 border-lime-400/70 pl-3">Climate Data</div>
       {/* ClimateCharts (at the bottom) */}
       <div className="mb-6">
         <ClimateCharts

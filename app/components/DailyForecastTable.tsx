@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import WeatherIcon from '../lib/weatherIcons';
 
 interface DailyForecastTableProps {
   daily: {
@@ -75,9 +76,9 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
 
   return (
     <div className="w-full mb-6">
-      <div className="midnight-sky-bg shadow p-2 pt-4 border us-white-border">
+      <div className="midnight-sky-bg shadow p-2 pt-4 border us-white-border rounded-2xl">
         <button
-          className="w-full text-left font-mono text-gray-200 mb-2 flex items-center justify-between text-lg hover:bg-gray-700 rounded px-2 py-2"
+          className="w-full text-left font-mono text-gray-200 mb-2 flex items-center justify-between text-lg hover:bg-lime-400/10 rounded px-2 py-2"
           onClick={() => setTableOpen((v) => !v)}
         >
           <span className="us-white-text">7-Day Daily Forecast</span>
@@ -95,7 +96,7 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
               <div key={idx}>
                 {/* Day group header */}
                 <button
-                  className="w-full text-left py-2 px-2 font-bold text-lg text-white hover:bg-gray-700 rounded flex items-center justify-between"
+                  className="w-full text-left py-2 px-2 font-bold text-lg text-white hover:bg-lime-400/10 rounded flex items-center justify-between"
                   onClick={() => setOpenDay(openDay === idx ? null : idx)}
                 >
                   <span>{label}</span>
@@ -113,11 +114,11 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
                     {day && (
                       <div className="mb-2">
                         <button
-                          className="w-full text-left py-1 px-2 text-white hover:bg-gray-700 rounded flex items-center justify-between"
+                          className="w-full text-left py-1 px-2 text-white hover:bg-lime-400/10 rounded flex items-center justify-between"
                           onClick={() => setOpenSub(openSub?.dayIdx === idx && openSub.type === 'day' ? null : { dayIdx: idx, type: 'day' })}
                         >
                           <span className="flex items-center gap-2">
-                            {day.icon && <img src={day.icon} alt={day.shortForecast} className="w-8 h-8 rounded-sm sepia-60 border us-white-border" />}
+                            {day.icon && <WeatherIcon shortForecast={day.shortForecast} isDaytime={true} className="w-8 h-8 text-lime-300" />}
                             <span className="font-semibold">Day</span>
                             <span className="text-sm">{day.shortForecast}</span>
                           </span>
@@ -136,7 +137,7 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
                           <div></div>
                         </div>
                         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openSub?.dayIdx === idx && openSub.type === 'day' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                          <div className="mt-2 text-gray-300 text-sm midnight-sky-bg p-2 border us-white-border">
+                          <div className="mt-2 text-gray-300 text-sm midnight-sky-bg p-2 rounded-lg">
                             {day.detailedForecast}
                           </div>
                         </div>
@@ -146,11 +147,11 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
                     {night && (
                       <div className="mb-2">
                         <button
-                          className="w-full text-left py-1 px-2 text-white hover:bg-gray-700 rounded flex items-center justify-between"
+                          className="w-full text-left py-1 px-2 text-white hover:bg-lime-400/10 rounded flex items-center justify-between"
                           onClick={() => setOpenSub(openSub?.dayIdx === idx && openSub.type === 'night' ? null : { dayIdx: idx, type: 'night' })}
                         >
                           <span className="flex items-center gap-2">
-                            {night.icon && <img src={night.icon} alt={night.shortForecast} className="w-8 h-8 rounded-sm sepia-60 border us-white-border" />}
+                            {night.icon && <WeatherIcon shortForecast={night.shortForecast} isDaytime={false} className="w-8 h-8 text-lime-300" />}
                             <span className="font-semibold">Night</span>
                             <span className="text-sm">{night.shortForecast}</span>
                           </span>
@@ -169,7 +170,7 @@ export default function DailyForecastTable({ daily }: DailyForecastTableProps) {
                           <div></div>
                         </div>
                         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openSub?.dayIdx === idx && openSub.type === 'night' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                          <div className="mt-2 mb-2 text-gray-300 text-sm midnight-sky-bg p-2 border us-white-border">
+                          <div className="mt-2 mb-2 text-gray-300 text-sm midnight-sky-bg p-2 rounded-lg">
                             {night.detailedForecast}
                           </div>
                         </div>

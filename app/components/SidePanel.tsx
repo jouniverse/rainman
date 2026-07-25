@@ -62,7 +62,6 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [favoriteLoading, setFavoriteLoading] = useState(false);
   const [stateOptions, setStateOptions] = useState<StateOption[]>([]);
   const [stateSearch, setStateSearch] = useState('');
   const [showStateDropdown, setShowStateDropdown] = useState(false);
@@ -75,38 +74,6 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
   const cityDropdownRef = useRef<HTMLUListElement>(null);
   const [pendingCoords, setPendingCoords] = useState<{ lat: number; lng: number } | null>(null);
   const [mapCenter, setMapCenter] = useState<[number, number]>([DEFAULT_CENTER.lat, DEFAULT_CENTER.lng]);
-  const [userFavorite, setUserFavorite] = useState<{
-    lat?: number;
-    lng?: number;
-    state?: string;
-    city?: string;
-    street?: string;
-    zip?: string;
-  } | null>(null);
-
-  // Fetch user's favorite location on initial load
-  useEffect(() => {
-    const fetchUserFavorite = async () => {
-      try {
-        const response = await fetch('/api/users');
-        if (response.ok) {
-          const userData = await response.json();
-          setUserFavorite({
-            lat: userData.lat,
-            lng: userData.lng,
-            state: userData.state,
-            city: userData.city, 
-            street: userData.street,
-            zip: userData.zip
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching user favorite location:', error);
-      }
-    };
-
-    fetchUserFavorite();
-  }, []);
 
   // Update mapCenter when selectedLocation changes (for initial load and Weather button)
   useEffect(() => {
@@ -526,147 +493,6 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
     setError(null);
   };
 
-  // Use the user's favorite location
-  const handleUseFavoriteLocation = async () => {
-    if (!userFavorite) return;
-    
-    setFavoriteLoading(true);
-    setError(null);
-    
-    try {
-      // Case 1: User has lat/lng values (most precise)
-      if (userFavorite.lat !== undefined && userFavorite.lat !== null && 
-          userFavorite.lng !== undefined && userFavorite.lng !== null) {
-        const lat = userFavorite.lat;
-        const lng = userFavorite.lng;
-        setPendingCoords({ lat, lng });
-        setMapCenter([lat, lng]);
-        
-        // Update location input fields - strings required
-        setLocation({
-          street: '',
-          city: '',
-          state: '',
-          zip: '',
-          latitude: lat.toString(),
-          longitude: lng.toString()
-        });
-        
-        setCitySearch('');
-        setStateSearch('');
-        setFavoriteLoading(false);
-        return;
-      }
-      
-      // Case 2: User has address components but no lat/lng
-      const hasStreetAddress = userFavorite.street && userFavorite.street.trim() !== '';
-      
-      // First, try to construct a location using available fields
-      const favoriteLocation: LocationInput = {
-        street: userFavorite.street || '',
-        city: userFavorite.city || '',
-        state: userFavorite.state || '',
-        zip: userFavorite.zip || '',
-        latitude: '',
-        longitude: ''
-      };
-      
-      // Set the location state with the favorite values
-      setLocation(favoriteLocation);
-      
-      // Update search values for dropdowns
-      if (favoriteLocation.city) {
-        setCitySearch(favoriteLocation.city);
-      }
-      
-      if (favoriteLocation.state) {
-        setStateSearch(favoriteLocation.state);
-      }
-      
-      // If we have a street address, and any combination of city/state/zip, try geocoding
-      if (hasStreetAddress && (favoriteLocation.city || favoriteLocation.state || favoriteLocation.zip)) {
-        // For geocoding, we need to have at least one of: city+state, state+zip, or city+zip
-        const hasValidCombination = (favoriteLocation.city && favoriteLocation.state) || 
-                                   (favoriteLocation.state && favoriteLocation.zip) ||
-                                   (favoriteLocation.city && favoriteLocation.zip);
-        
-        if (hasValidCombination) {
-          // Build the query parameters
-          const params = new URLSearchParams();
-          params.append('type', 'address');
-          params.append('street', favoriteLocation.street);
-          if (favoriteLocation.city) params.append('city', favoriteLocation.city);
-          if (favoriteLocation.state) params.append('state', favoriteLocation.state);
-          if (favoriteLocation.zip) params.append('zip', favoriteLocation.zip);
-          params.append('benchmark', '4');
-          params.append('format', 'json');
-
-          // Try geocoding the address
-          try {
-            const url = `/api/geocode?${params.toString()}`;
-            console.log('Geocoding favorite address with:', params.toString());
-            const res = await fetch(url);
-            const data = await res.json();
-            
-            const match = data?.result?.addressMatches?.[0];
-            if (match && match.coordinates) {
-              console.log('Found match for favorite address:', match);
-              const lat = parseFloat(String(match.coordinates.y).replace(/−/g, '-'));
-              const lng = parseFloat(String(match.coordinates.x).replace(/−/g, '-'));
-              
-              setPendingCoords({ lat, lng });
-              setMapCenter([lat, lng]);
-              setFavoriteLoading(false);
-              return;
-            } else {
-              console.log('No match found for favorite address, falling back to city/state');
-            }
-          } catch (error) {
-            console.error('Error geocoding favorite address:', error);
-          }
-        }
-      }
-      
-      // If geocoding failed or we don't have street address, try city/state
-      // If we have city and state, try to find coordinates from cityOptions
-      if (favoriteLocation.city && favoriteLocation.state) {
-        const city = cityOptions.find(
-          c => c.city.toLowerCase() === favoriteLocation.city.toLowerCase() && 
-              c.state_id === favoriteLocation.state
-        );
-        
-        if (city) {
-          // Parse string lat/lng to numbers
-          const lat = parseFloat(city.lat);
-          const lng = parseFloat(city.lng);
-          setPendingCoords({ lat, lng });
-          setMapCenter([lat, lng]);
-          setFavoriteLoading(false);
-          return;
-        }
-      } 
-      // If only state, use state center
-      else if (favoriteLocation.state) {
-        const state = stateOptions.find(s => s.state_id === favoriteLocation.state);
-        if (state) {
-          // Parse string lat/lng to numbers
-          const lat = parseFloat(state.lat);
-          const lng = parseFloat(state.lng);
-          setPendingCoords({ lat, lng });
-          setMapCenter([lat, lng]);
-          setFavoriteLoading(false);
-          return;
-        }
-      }
-      
-      setFavoriteLoading(false);
-    } catch (error) {
-      console.error('Error setting favorite location:', error);
-      setError('Failed to set favorite location');
-      setFavoriteLoading(false);
-    }
-  };
-
   // Clear all inputs and reset map
   const handleClear = () => {
     setLocation({
@@ -701,25 +527,10 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
   };
 
   return (
-    <div className="h-full flex flex-col overflow-y-auto overflow-x-hidden text-gray-100 font-mono px-4 py-2 midnight-sky-bg" style={{ fontFamily: 'Share Tech Mono, monospace' }}>
+    <div className="h-full flex flex-col overflow-y-auto overflow-x-hidden text-gray-100 font-mono px-4 py-2 midnight-sky-bg md:rounded-r-2xl" style={{ fontFamily: 'Share Tech Mono, monospace' }}>
       <div className="flex flex-col gap-4 flex-1 min-h-0 w-full max-w-full">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold mb-2">Enter Location</h2>
-          {userFavorite && (
-            (userFavorite.lat !== undefined && userFavorite.lat !== null && 
-            userFavorite.lng !== undefined && userFavorite.lng !== null) || 
-            (userFavorite.city && userFavorite.state) || 
-            userFavorite.street
-          ) && (
-            <button
-              onClick={handleUseFavoriteLocation}
-              disabled={favoriteLoading}
-              className="p-2 hover:bg-black/30 rounded transition-colors mr-5"
-              title="Use Favorite Location"
-            >
-              <img src="/icons/favorite-fill.svg" alt="Favorite" className="w-6 h-6" />
-            </button>
-          )}
         </div>
         <div className="text-lg font-medium mb-3">Enter Address</div>
         <form onSubmit={handleSubmit} className="space-y-3 w-full max-w-full">
@@ -736,7 +547,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                 setLocation(prev => ({ ...prev, state: e.target.value.toUpperCase() }));
               }}
               onFocus={() => setShowStateDropdown(true)}
-              className="block w-full max-w-sm rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full max-w-sm rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
               autoComplete="off"
               placeholder="e.g., CA"
               ref={stateInputRef}
@@ -744,7 +555,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
             {showStateDropdown && stateOptions.length > 0 && (
               <ul
                 ref={stateDropdownRef}
-                className="absolute z-10 bg-gray-900 border border-gray-700 w-full max-w-sm mt-1 rounded shadow max-h-48 overflow-y-auto"
+                className="absolute z-10 midnight-sky-bg border us-white-border w-full max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
               >
                 {stateOptions
                   .filter(opt =>
@@ -766,7 +577,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                   .map(opt => (
                     <li
                       key={opt.state_id}
-                      className="px-3 py-2 cursor-pointer hover:bg-blue-700 text-white"
+                      className="px-3 py-2 cursor-pointer hover:bg-lime-400/20 text-white"
                       onClick={() => handleStateDropdownSelect(opt)}
                     >
                       <span className="font-mono font-bold">{opt.state_id}</span>
@@ -789,7 +600,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                 setLocation(prev => ({ ...prev, city: e.target.value }));
               }}
               onFocus={() => setShowCityDropdown(true)}
-              className="block w-full max-w-sm rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full max-w-sm rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
               autoComplete="off"
               placeholder="e.g., Los Angeles"
               ref={cityInputRef}
@@ -797,7 +608,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
             {showCityDropdown && cityOptions.length > 0 && (
               <ul
                 ref={cityDropdownRef}
-                className="absolute z-10 bg-gray-900 border border-gray-700 w-full max-w-sm mt-1 rounded shadow max-h-48 overflow-y-auto"
+                className="absolute z-10 midnight-sky-bg border us-white-border w-full max-w-sm mt-1 rounded-lg shadow-lg max-h-48 overflow-y-auto"
               >
                 {cityOptions
                   .filter(opt => {
@@ -811,7 +622,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                   .map(opt => (
                     <li
                       key={opt.city + '-' + opt.state_id}
-                      className="px-3 py-2 cursor-pointer hover:bg-blue-700 text-white"
+                      className="px-3 py-2 cursor-pointer hover:bg-lime-400/20 text-white"
                       onClick={() => {
                         setLocation(prev => ({
                           ...prev,
@@ -840,7 +651,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
               name="zip"
               value={location.zip}
               onChange={handleChange}
-              className="block w-full max-w-sm rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full max-w-sm rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
               pattern="[0-9]{5}"
               title="Five digit zip code"
               autoComplete="off"
@@ -855,12 +666,12 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
               name="street"
               value={location.street}
               onChange={handleChange}
-              className="block w-full max-w-sm rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+              className="block w-full max-w-sm rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
               autoComplete="off"
               placeholder="e.g., 123 Main St"
             />
           </div>
-          <div className="border-t border-gray-700 pt-4">
+          <div className="border-t us-white-border pt-4">
             <h3 className="text-lg font-medium mb-3">Or enter coordinates</h3>
             <div className="grid grid-cols-2 gap-3">
               <div>
@@ -872,7 +683,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                   value={location.latitude}
                   onChange={handleChange}
                   step="any"
-                  className="block w-full max-w-xs rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full max-w-xs rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
                   placeholder="e.g., 34.0522"
                   autoComplete="off"
                 />
@@ -886,7 +697,7 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
                   value={location.longitude}
                   onChange={handleChange}
                   step="any"
-                  className="block w-full max-w-xs rounded bg-gray-800 border border-gray-700 px-2 py-1 focus:border-blue-500 focus:ring-blue-500"
+                  className="block w-full max-w-xs rounded-lg bg-black/30 border border-white/15 px-2 py-1.5 outline-none transition-colors focus:border-lime-400 focus:ring-1 focus:ring-lime-400"
                   placeholder="e.g., -118.2437"
                   autoComplete="off"
                 />
@@ -897,14 +708,14 @@ export default function SidePanel({ selectedLocation = DEFAULT_CENTER, setSelect
           <div className="flex gap-3 mt-4">
             <button
               type="submit"
-              className="flex-1 items-center justify-center bg-black text-white rounded border border-white py-2 px-4 hover:border-rose-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="flex-1 items-center justify-center bg-black text-white rounded-lg border border-lime-400/50 py-2 px-4 transition-colors hover:bg-lime-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-2"
               disabled={loading}
             >
               {loading ? <div className="loader-bar"></div> : 'Weather'}
             </button>
             <button
               type="button"
-              className="flex-1 bg-gray-700 text-white py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              className="flex-1 bg-white/5 text-white py-2 px-4 rounded-lg border border-white/15 transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2"
               onClick={handleClear}
             >
               Clear

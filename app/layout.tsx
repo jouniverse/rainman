@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'Rainman',
@@ -24,7 +23,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#222831" />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Line, Bar } from "react-chartjs-2";
 import Image from 'next/image';
 import {
   Chart as ChartJS,
@@ -14,6 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import StickyYAxisChart from './StickyYAxisChart';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
@@ -102,8 +102,8 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
       {
         label: "TAVG (°F)",
         data: tavg,
-        borderColor: "#B31942",
-        backgroundColor: "rgb(179, 25, 66, 0.2)",
+        borderColor: "#a3e635",
+        backgroundColor: "rgba(163, 230, 53, 0.2)",
         pointRadius: 0,
         yAxisID: "y",
       },
@@ -143,7 +143,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
         position: "left" as const, 
         title: { display: true, text: "°F" },
         grid: {
-          color: 'rgb(255, 255, 255, 0.1)',
+          color: 'rgb(255, 255, 255, 0.05)',
           drawOnChartArea: true,
         }
       },
@@ -183,7 +183,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
         beginAtZero: true, 
         title: { display: true, text: "mm" },
         grid: {
-          color: 'rgb(255, 255, 255, 0.1)',
+          color: 'rgb(255, 255, 255, 0.05)',
           drawOnChartArea: true,
         }
       },
@@ -199,7 +199,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
   return (
     <div className="">
       {climate.warning && (
-        <div className="red-inferno-bg us-white-text border-l-4 orange-border p-3 mb-2 rounded">
+        <div className="bg-amber-950/50 text-amber-100 border-l-4 border-amber-400/60 p-3 mb-2 rounded-lg">
           {climate.warning}
         </div>
       )}
@@ -210,7 +210,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
         )}
       </div>
       {/* Temperature Chart (collapsible) */}
-      <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border">
+      <div className="midnight-sky-bg p-4 pt-6 shadow border us-white-border rounded-t-2xl">
         <button 
           className="us-white-text mb-2 flex items-center justify-between w-full text-left" 
           onClick={() => setShowTemp((v) => !v)}
@@ -225,17 +225,11 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
           />
         </button>
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showTemp ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="relative">
-            <div className="overflow-x-auto w-full">
-              <div className="min-w-[700px] w-[900px] relative" style={{ height: '400px' }}>
-                <Line data={tempChart} options={tempOptions} />
-              </div>
-            </div>
-          </div>
+          <StickyYAxisChart chartType="line" data={tempChart} options={tempOptions} />
         </div>
       </div>
       {/* Precipitation Chart (collapsible) */}
-      <div className="midnight-sky-bg p-4 pt-6 shadow border-r border-l border-b us-white-border">
+      <div className="midnight-sky-bg p-4 pt-6 shadow border-r border-l border-b us-white-border rounded-b-2xl">
         <button 
           className="us-white-text mb-2 flex items-center justify-between w-full text-left" 
           onClick={() => setShowPrecip((v) => !v)}
@@ -250,13 +244,7 @@ export default function ClimateCharts({ climate, loading, error }: ClimateCharts
           />
         </button>
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showPrecip ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="relative">
-            <div className="overflow-x-auto w-full">
-              <div className="min-w-[700px] w-[900px] relative" style={{ height: '400px' }}>
-                <Bar data={prcpChart} options={prcpOptions} />
-              </div>
-            </div>
-          </div>
+          <StickyYAxisChart chartType="bar" data={prcpChart} options={prcpOptions} />
         </div>
       </div>
     </div>

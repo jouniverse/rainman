@@ -4,13 +4,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Share+Tech+Mono&display=swap");
 
 :root {
-  --scrollbar-color: #ffffff;
-  --scrollbar-bg-color: #16151d;
+  --scrollbar-color: #a3e635;
+  --scrollbar-bg-color: #0c0f10;
 
   --pistachio: #aacbc4;
 
   --dark-void: #0e0e0e;
-  --midnight-sky: #16151d;
+  --midnight-sky: #1a1c1e;
 
   --us-red: #b31942;
   --us-blue: #0a3161;
@@ -47,6 +47,15 @@
 }
 
 html,
+html {
+  background-color: #0c0f10;
+  background-image: linear-gradient(rgba(10, 12, 13, 0.78), rgba(10, 12, 13, 0.78)), url("/images/account-bg-0.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 body {
   font-family: "Share Tech Mono", monospace;
 }
@@ -117,11 +126,13 @@ body {
 }
 
 .us-white-border {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .midnight-sky-bg {
-  background-color: var(--midnight-sky);
+  background-color: rgba(26, 28, 30, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .midnight-sky-text {
@@ -147,7 +158,7 @@ body {
 .loader-bar {
   height: 15px;
   width: 80px;
-  --c: no-repeat linear-gradient(#ffffff 0 0);
+  --c: no-repeat linear-gradient(#a3e635 0 0);
   background: var(--c), var(--c), var(--c), var(--c);
   background-size: 26% 3px;
   margin: 0 auto;

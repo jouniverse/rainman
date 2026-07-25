@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,6 +13,7 @@ import {
 } from 'chart.js';
 import { DateTime } from 'luxon';
 import Image from 'next/image';
+import StickyYAxisChart from './StickyYAxisChart';
 
 ChartJS.register(
   CategoryScale,
@@ -74,8 +74,8 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
       {
         label: 'Temperature (°F)',
         data: tempData,
-        borderColor: '#B31942',
-        backgroundColor: 'rgb(179, 25, 66, 0.2)',
+        borderColor: '#a3e635',
+        backgroundColor: 'rgba(163, 230, 53, 0.2)',
         pointRadius: 0,
       },
       {
@@ -101,7 +101,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         position: 'left' as const, 
         title: { display: true, text: '°F' },
         grid: {
-          color: 'rgb(255, 255, 255, 0.1)',
+          color: 'rgb(255, 255, 255, 0.05)',
           drawOnChartArea: true,
         }
       },
@@ -120,8 +120,8 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
       {
         label: 'Precipitation (%)',
         data: precipData,
-        borderColor: '#B31942',
-        backgroundColor: 'rgb(179, 25, 66, 0.2)',
+        borderColor: '#a3e635',
+        backgroundColor: 'rgba(163, 230, 53, 0.2)',
         pointRadius: 0,
       },
       {
@@ -147,7 +147,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         beginAtZero: true, 
         title: { display: true, text: '%' },
         grid: {
-          color: 'rgb(255, 255, 255, 0.1)',
+          color: 'rgb(255, 255, 255, 0.05)',
           drawOnChartArea: true,
         }
       },
@@ -166,8 +166,8 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
       {
         label: 'Windspeed (mph)',
         data: windData,
-        borderColor: '#B31942',
-        backgroundColor: 'rgb(179, 25, 66, 0.2)',
+        borderColor: '#a3e635',
+        backgroundColor: 'rgba(163, 230, 53, 0.2)',
         pointRadius: 0,
       },
     ],
@@ -186,7 +186,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
         beginAtZero: true, 
         title: { display: true, text: 'mph' },
         grid: {
-          color: 'rgb(255, 255, 255, 0.2)',
+          color: 'rgb(255, 255, 255, 0.05)',
           drawOnChartArea: true,
         }
       },
@@ -202,7 +202,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
   return (
     <div className="">
       {/* Temperature & Dewpoint Chart (collapsible) */}
-      <div className="midnight-sky-bg p-4 pt-6 shadow border-t border-l border-r us-white-border">
+      <div className="midnight-sky-bg p-4 pt-6 shadow border-t border-l border-r us-white-border rounded-t-2xl">
         <button 
           className="us-white-text mb-2 flex items-center justify-between w-full text-left" 
           onClick={() => setShowTemp((v) => !v)}
@@ -217,13 +217,7 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
           />
         </button>
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showTemp ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="relative">
-            <div className="overflow-x-auto w-full">
-              <div className="min-w-[700px] w-[900px] relative" style={{ height: '400px' }}>
-                <Line data={tempChart} options={tempOptions} />
-              </div>
-            </div>
-          </div>
+          <StickyYAxisChart chartType="line" data={tempChart} options={tempOptions} />
         </div>
       </div>
       {/* Precipitation & Humidity Chart (collapsible) */}
@@ -242,17 +236,11 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
           />
         </button>
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showPrecip ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="relative">
-            <div className="overflow-x-auto w-full">
-              <div className="min-w-[700px] w-[900px] relative" style={{ height: '400px' }}>
-                <Line data={precipChart} options={precipOptions} />
-              </div>
-            </div>
-          </div>
+          <StickyYAxisChart chartType="line" data={precipChart} options={precipOptions} />
         </div>
       </div>
       {/* Windspeed Chart (collapsible) */}
-      <div className="midnight-sky-bg p-4 pt-6 shadow border-l border-r border-b us-white-border">
+      <div className="midnight-sky-bg p-4 pt-6 shadow border-l border-r border-b us-white-border rounded-b-2xl">
         <button 
           className="us-white-text mb-2 flex items-center justify-between w-full text-left" 
           onClick={() => setShowWind((v) => !v)}
@@ -267,15 +255,9 @@ export default function ForecastCharts({ hourly, timeZone }: ForecastChartsProps
           />
         </button>
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showWind ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-          <div className="relative">
-            <div className="overflow-x-auto w-full">
-              <div className="min-w-[700px] w-[900px] relative" style={{ height: '400px' }}>
-                <Line data={windChart} options={windOptions} />
-              </div>
-            </div>
-          </div>
+          <StickyYAxisChart chartType="line" data={windChart} options={windOptions} />
         </div>
       </div>
     </div>
   );
-} 
+}
