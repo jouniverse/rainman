@@ -2,11 +2,11 @@
 
 ## Description
 
-**Rainman** (officially named [USWeather](https://www.usweather.info)) is a weather app for US locations. The user can select a location and check the current weather and the forecast for the next 7 days, as well as some climate data for the location. The hourly weather forecast is _"updated every hour approximately 5 minutes after the hour"_<sup>1</sup>.
+**Rainman** (officially called [USWeather](https://www.usweather.info)) is a weather app for US locations. The user can select a location and check the current weather and the forecast for the next 7 days, as well as some climate data for the location. The hourly weather forecast is _"updated every hour approximately 5 minutes after the hour"_<sup>1</sup>.
 
 ## Data Sources
 
-**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as satellite imagery, like the GeoColor CONUS<sup>4</sup> view are updated more frequently. Climate data is from the last 10 years, if available. Otherwise older data is displayed.
+**NOAA** (National Oceanic and Atmospheric Administration) provides the weather<sup>2</sup> and climate<sup>3</sup> data for the app. The APIs are free US government services. The weather data is updated every hour. Radar imagery as well as satellite imagery, like the **GeoColor CONUS**<sup>4</sup> view are updated more frequently. Climate data is from the last 10 years, if available. Otherwise older data is displayed.
 
 ## UI
 
