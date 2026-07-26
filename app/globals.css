@@ -129,13 +129,18 @@ body {
 }
 
 .midnight-sky-bg {
-  /* background-color: rgba(26, 28, 30, 0.7); */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .midnight-sky-bg-dark {
   background-color: rgba(26, 28, 30, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.dropdown-bg {
+  background-color: rgba(26, 28, 30, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
